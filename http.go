@@ -49,7 +49,7 @@ func (s *Server) handleRequestBatch(ctx context.Context, body []byte) []Response
 	return responses
 }
 
-func (s *Server) ServeHttp(w http.ResponseWriter, r *http.Request) {
+func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
