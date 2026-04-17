@@ -17,7 +17,7 @@ func writeResponseJson(w http.ResponseWriter, status int, v interface{}) {
 func (s *Server) handleOneRequest(ctx context.Context, body []byte) *Response {
 	var req Request
 	if err := json.Unmarshal(body, &req); err != nil {
-		return errorResponse(nil, ErrParseError("Parse Error"))
+		return errorResponse(nil, ErrParseError("Parse error"))
 	}
 
 	return s.HandleRequest(ctx, req)
@@ -33,7 +33,7 @@ func (s *Server) handleRequestBatch(ctx context.Context, body []byte) []Response
 
 	if len(reqs) == 0 {
 		return []Response{
-			*errorResponse(nil, ErrInvalidRequest("Invalid Request")),
+			*errorResponse(nil, ErrInvalidRequest("Invalid request")),
 		}
 	}
 
@@ -59,12 +59,14 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		writeResponseJson(w, http.StatusOK, errorResponse(nil, ErrParseError("Parse error")))
+		return
 	}
 
 	body = bytes.TrimSpace(body)
 
 	if len(body) == 0 {
 		writeResponseJson(w, http.StatusOK, errorResponse(nil, ErrInvalidRequest("Invalid request")))
+		return
 	}
 
 	ctx := r.Context()

@@ -1,4 +1,4 @@
-//omitempty означает, что оно будет включено в запрос только, если оно не пустое
+//omitempty означает, что оно будет включено в json только, если оно не пустое
 
 package jsonrpc2
 
@@ -13,7 +13,7 @@ type Request struct {
 
 type Response struct {
 	JsonRPC string           `json:"jsonrpc"`
-	Result  any              `json:"result,omitempty"`
+	Result  interface{}      `json:"result,omitempty"`
 	Error   *Error           `json:"error,omitempty"`
 	Id      *json.RawMessage `json:"id"`
 }

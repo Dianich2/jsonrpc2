@@ -12,7 +12,7 @@ func validateRequest(req Request) *Error {
 	}
 
 	if req.Method == "" {
-		return ErrInvalidRequest("method must be not empty")
+		return ErrInvalidRequest("method must not be empty")
 	}
 
 	return nil

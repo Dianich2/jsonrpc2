@@ -45,7 +45,7 @@ func (s *Server) Register(methodName string, handler HandlerFunc) error {
 
 // приватная функция для поиска метода сервером
 func (s *Server) searchMethodByName(methodName string) (HandlerFunc, bool) {
-	s.mutex.Lock()
+	s.mutex.RLock()
 	defer s.mutex.Unlock()
 
 	handler, res := s.methods[methodName]

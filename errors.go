@@ -28,7 +28,7 @@ func ErrInvalidRequest(message string) *Error {
 
 func ErrMethodNotFound(methodName string) *Error {
 	return &Error{
-		Code:    CodeInvalidRequest,
+		Code:    CodeMethodNotFound,
 		Message: "Method not found",
 		Data:    methodName,
 	}
